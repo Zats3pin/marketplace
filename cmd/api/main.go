@@ -2,6 +2,7 @@ package main
 
 import (
 	"MarketPlaceSolo/internal/config"
+	"MarketPlaceSolo/internal/pkg/db"
 	"fmt"
 	"github.com/joho/godotenv"
 	"log"
@@ -13,5 +14,8 @@ func main() {
 	}
 
 	cfg := config.Load()
-	fmt.Printf("server run on port %s\n", cfg.ServerPort)
+	database := db.Connect(cfg)
+	defer database.Close()
+
+	fmt.Printf("postgreSQL connection successful\n")
 }
