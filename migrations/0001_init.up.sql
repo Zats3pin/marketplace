@@ -8,7 +8,7 @@ CREATE TABLE users (
 CREATE TABLE products (
                           id SERIAL PRIMARY KEY,
                           name VARCHAR(100) NOT NULL,
-                          price NUMERIC(10,2) NOT NULL,
+                          price BIGINT NOT NULL,
                           stock INT NOT NULL DEFAULT 0,
                           created_at TIMESTAMP DEFAULT NOW()
 );
@@ -16,7 +16,7 @@ CREATE TABLE products (
 CREATE TABLE orders (
                         id SERIAL PRIMARY KEY,
                         user_id INT REFERENCES users(id),
-                        total NUMERIC(10,2) NOT NULL,
+                        total BIGINT NOT NULL,
                         status VARCHAR(20) NOT NULL DEFAULT 'created',
                         created_at TIMESTAMP DEFAULT NOW()
 );
@@ -26,5 +26,5 @@ CREATE TABLE order_items (
                              order_id INT REFERENCES orders(id),
                              product_id INT REFERENCES products(id),
                              quantity INT NOT NULL,
-                             price NUMERIC(10,2) NOT NULL
+                             price BIGINT NOT NULL
 );
